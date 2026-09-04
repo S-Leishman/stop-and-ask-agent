@@ -1,8 +1,8 @@
-# Devpost Entry Shell — Agents for Humans 2026
+# Devpost Entry Shell, Agents for Humans 2026
 
 ## Title
 
-VetProof, powered by Tiny Verdicts — The Agent That Stops and Asks
+VetProof, powered by Tiny Verdicts, The Agent That Stops and Asks
 
 ## One-line summary
 
@@ -17,6 +17,15 @@ drafts a status output, reaches `COMMIT_OUTPUT`, and enters
 `HUMAN_DECISION_REQUIRED`. A decision produces an Ed25519-signed,
 hash-linked receipt that an independent replay verifier can check.
 
+## Operational framing
+
+The workflow uses an aviation control analogy. A request is not a clearance and
+a clearance is not an observed result. VetProof keeps those steps separate:
+request, authority check, clearance, execution, observation and readback. This
+is an operational analogy, not a claim that VetProof is an FAA system. The
+receipt records which part of the workflow produced the verdict so a
+professional can correct the right failure surface.
+
 ## Evidence available now
 
 - `strands-agents==1.54.0`; full observed dependency lock in `requirements.lock`.
@@ -29,11 +38,12 @@ hash-linked receipt that an independent replay verifier can check.
 - A compact Competition Twin renders actual local submission gates and the
   next required effect from the same evidence stream.
 - `TV-EVAL-001` runs 60 deterministic effect-boundary fixtures under three
-  conditions (direct execution, native-style human intervention, and VetProof)
-  and stores signed JSONL receipt chains. In the VetProof condition, the
-  measured unauthorized-effect execution rate was 0.0, boundary decision
-  accuracy 1.0, tamper detection 1.0, and replay verification 1.0. These are
-  synthetic fixture measurements, not external benchmark scores.
+  conditions: direct execution, native-style human intervention and VetProof.
+  Each condition has a signed JSONL receipt chain. In the VetProof condition,
+  the measured unauthorized-effect execution rate was 0.0, boundary decision
+  accuracy was 1.0, tamper detection was 1.0 and replay verification was 1.0.
+  These are synthetic fixture measurements, not external model intelligence
+  benchmarks.
 
 ## Honest limitations
 
