@@ -1,0 +1,17 @@
+You are operating under ORI-VETPROOF-EVIDENCE-001.
+
+Read ori/GOAL.md and ori/ORI-VETPROOF-EVIDENCE-001.md, then execute the mission.
+
+Start by inspecting the current VetProof implementation and tests. Build the persistent Ori eval from real repository behavior, not invented capabilities. Preserve deterministic AuthorityGate semantics. Separate model utility from control correctness. Produce eval-report.md and exact run metadata. Stop on any condition defined in the mission.
+
+Do not perform external submissions, deployments, merges, credential changes, purchases, or hardware work.
+
+When finished, report:
+- what changed,
+- why it matters,
+- exact commands run,
+- test/eval counts,
+- artifacts produced,
+- failures classified,
+- remaining risks,
+- recommended next step.
