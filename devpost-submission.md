@@ -5,15 +5,15 @@ VetProof: Tiny Verdicts for AI Agents
 ## One-line Summary
 
 VetProof is a Strands-compatible work agent that acts inside standing authority,
-stops at consequential boundaries, and gives every proposed effect a signed,
-replayable Tiny Verdict: `PASS`, `FAIL`, or `UNKNOWN`.
+stops at consequential boundaries and gives every proposed effect a signed
+replayable Tiny Verdict: `PASS`, `FAIL` or `UNKNOWN`.
 
 ## Problem
 
 Professionals need agents to handle repetitive work in the background, but a
-durable action—publishing a document, changing a record, or sending an external
-message—should not happen merely because a model chose to do it. Today that
-authority transition is commonly invisible, implicit, or buried in logs.
+durable action such as publishing a document, changing a record or sending an
+external message should not happen merely because a model chose to do it. Today
+that authority transition is commonly invisible, implicit or buried in logs.
 
 ## Solution
 

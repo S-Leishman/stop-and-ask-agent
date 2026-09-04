@@ -1,22 +1,22 @@
 # VetProof, powered by Tiny Verdicts
 
-## Stop-and-Ask Agent — an agent that works autonomously and stops at the boundary
+## Stop-and-Ask Agent, an agent that works autonomously and stops at the boundary
 
 **The problem.** AI agents that do real work make real changes to real systems.
-The dangerous moment is not the work — it's the write that nobody explicitly
-authorized. Most demos hide that moment in a log line.
+The dangerous moment is not the work. It is the write that nobody explicitly
+authorized. Most demos hide that moment in a log line. So this leads us to ask
+how an agent can keep working while authority remains visible and controlled.
 
-**Who it's for.** Anyone who needs an agent to keep working while they're not
-watching — and needs proof of exactly what the agent was allowed to do, what it
-did, and which human decided the parts that mattered.
+**Who it is for.** Professionals who need an agent to keep working while they
+are not watching and who need proof of what the agent was allowed to do, what it
+did and which human decided the parts that mattered.
 
 **What it does.** The agent runs inside a standing authority envelope that
-carries **zero** unattended durable writes. It reads its brief, drafts the work,
-and the moment it reaches the effect ceiling it stops, shows one screen —
-proposed action, authority check, ceiling, decision — and waits. A human hits
-APPROVE or DENY. Every decision lands in an Ed25519-signed, sha256-linked,
-append-only receipt chain that replays: mutate a single byte and verification
-fails.
+carries **zero** unattended durable writes. It reads its brief, drafts the work
+and when it reaches the effect ceiling it stops. The screen shows the proposed
+action, the authority check, the ceiling and the decision. A human selects
+APPROVE or DENY. Every decision lands in an Ed25519-signed, sha256-linked
+append-only receipt chain. Change one byte and verification fails.
 
 ```
 PROPOSED ACTION → POLICY / AUTHORITY CHECK → EFFECT CEILING
@@ -37,7 +37,7 @@ child agent envelope  ── monotonic narrowing: child ⊆ parent, ceilings onl
 Strands agent (tools: read_brief, request_commit)
       │  in-envelope work runs autonomously
       ▼
-AuthorityGate (deterministic, code — not the model)
+AuthorityGate (deterministic code, not the model)
       │  effect ceiling reached → REQUIRES_HUMAN
       ▼
 one-screen decision (APPROVE / DENY)
@@ -45,8 +45,29 @@ one-screen decision (APPROVE / DENY)
 receipt chain (Ed25519-signed, sha256-linked) ── replay verification
 ```
 
-The authority decision is deterministic code. The model — whichever model —
-proposes; it never grants itself permission.
+The authority decision is deterministic code. The model proposes, regardless of
+which model is used, but it never grants itself permission.
+
+## An aviation and ATC analogy
+
+The design uses a familiar operational question. In air traffic control a
+request is not the same thing as a clearance and a clearance is not the same
+thing as an observed result. The same separation is useful for an AI agent:
+
+```text
+request → authority check → clearance → execution → observation → readback
+```
+
+This is an analogy to control procedures, not a claim that VetProof is an FAA
+system. The existing Aviation Membranes work provides a useful SHELL-style way
+to classify failures. A software or model mismatch is different from a human
+communication problem and both are different from an environmental state
+change. The receipt records which surface failed so a reviewer can correct the
+right part of the workflow.
+
+The aviation framing helps explain why a Tiny Verdict is more than a risk
+score. It is the recorded answer to a narrow operational question: may this
+principal perform this exact effect against this state now?
 
 ## Tiny Verdict
 
