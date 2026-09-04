@@ -20,11 +20,22 @@ DATA = ROOT / "data"
 OUT = ROOT / "output"
 
 
+def runtime_state_root() -> Path:
+    """Return the writable root for a deployed demo, preserving local defaults."""
+    if os.environ.get("VERCEL"):
+        return Path(os.environ.get("AEVION_STATE_DIR", "/tmp/vetproof"))
+    return ROOT
+
+
 class StopAndAskFlow:
     """One demo run: six visible stages, blocking at the human boundary."""
 
     def __init__(self, state_dir: Path | None = None):
-        self.state_dir = state_dir or (ROOT / "data")
+        runtime_root = runtime_state_root()
+        default_receipts = runtime_root / "receipts" if os.environ.get("VERCEL") else ROOT / "data"
+        self.state_dir = state_dir or default_receipts
+        self.output_dir = runtime_root / "output"
+        self.state_dir.mkdir(parents=True, exist_ok=True)
         self.chain = ReceiptChain(self.state_dir / "strands_spike_001_receipts.jsonl")
         self.parent = AuthorityContract(
             principal="human:scott",
@@ -143,8 +154,8 @@ class StopAndAskFlow:
                 return receipt
 
         # 5. EFFECT COMMITTED — only after explicit human authorization.
-        OUT.mkdir(exist_ok=True)
-        out_path = OUT / "status.md"
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        out_path = self.output_dir / "status.md"
         out_path.write_text(draft, encoding="utf-8")
         self._set("EFFECT_COMMITTED", wrote=str(out_path.relative_to(ROOT)),
                   bytes=len(draft.encode()))

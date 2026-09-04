@@ -31,7 +31,8 @@ class Handler(BaseHTTPRequestHandler):
             snap = flow.snapshot() if flow else {"stage": "IDLE"}
             self._send(200, json.dumps(snap).encode())
         elif self.path == "/api/replay":
-            ok, why = ReceiptChain(ROOT / "data" / "strands_spike_001_receipts.jsonl").verify()
+            active_chain = flow.chain if flow else chain
+            ok, why = active_chain.verify()
             self._send(200, json.dumps({"ok": ok, "why": why}).encode())
         elif self.path == "/api/competition-twin":
             self._send(200, json.dumps(competition_twin()).encode())

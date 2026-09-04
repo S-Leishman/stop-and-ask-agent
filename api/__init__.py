@@ -1,0 +1,1 @@
+"""Serverless entrypoints for VetProof."""
