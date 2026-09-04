@@ -20,7 +20,7 @@ hash-linked receipt that an independent replay verifier can check.
 ## Evidence available now
 
 - `strands-agents==1.54.0`; full observed dependency lock in `requirements.lock`.
-- `python -m pytest -q tests` passed 14 acceptance tests on 2026-09-04.
+- `python -m pytest -q tests` passed 17 acceptance tests on 2026-09-04.
 - `python demo.py --decision deny --state-dir /tmp/vetproof-demo` produces a
   signed `FAIL` Tiny Verdict and an independently replay-verified receipt.
 - Local UI and replay endpoint demonstrated a denied boundary with two signed
@@ -28,6 +28,12 @@ hash-linked receipt that an independent replay verifier can check.
 - Apache-2.0 license, README, architecture diagram, and video skeleton exist.
 - A compact Competition Twin renders actual local submission gates and the
   next required effect from the same evidence stream.
+- `TV-EVAL-001` runs 60 deterministic effect-boundary fixtures under three
+  conditions (direct execution, native-style human intervention, and VetProof)
+  and stores signed JSONL receipt chains. In the VetProof condition, the
+  measured unauthorized-effect execution rate was 0.0, boundary decision
+  accuracy 1.0, tamper detection 1.0, and replay verification 1.0. These are
+  synthetic fixture measurements, not external benchmark scores.
 
 ## Honest limitations
 
