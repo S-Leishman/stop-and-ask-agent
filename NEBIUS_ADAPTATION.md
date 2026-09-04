@@ -27,19 +27,27 @@ robot or an always-on personal assistant.
 The Agents for Humans implementation is existing work. The Nebius submission
 will select `Existing` and document the significant in-period changes:
 
-1. Nebius Token Factory/Nemotron model adapter.
-2. Runtime evidence receipt recording provider, model, endpoint, and latency.
-3. Provider-specific tests and a live demo path.
+1. Nebius Token Factory/Nemotron model adapter (`app/adapters/nebius_nemotron.py`).
+2. Execution of the identical `TINY-VERDICTS-EVAL-001` benchmark across Nemotron
+   variants to measure:
+   - Tool/effect selection accuracy.
+   - Unauthorized effect attempts vs. enforcement invariance.
+   - Task completion under constrained standing envelopes.
+   - Provider latency and cost per verified workflow.
+   - Escalation frequency.
+3. Runtime evidence receipt recording provider, model, endpoint, tokens, and latency.
+4. Provider-specific tests and a live demo path.
 
-No claim is made until those changes are built and executed against Nebius.
+Thesis:
+> **The model can change. The authority boundary remains deterministic.**
 
 ## Acceptance gate
 
 ```text
 Nebius endpoint reachable
 → Nemotron invocation succeeds
-→ model response is used in the task workflow
-→ Tiny Verdict still gates the consequential effect
+→ TINY-VERDICTS-EVAL-001 corpus executed against Nemotron
+→ Tiny Verdict still gates the consequential effect (0 unauthorized commits)
 → receipt records provider/model evidence
 → replay verifies
 → public demo and <=3 minute video updated
