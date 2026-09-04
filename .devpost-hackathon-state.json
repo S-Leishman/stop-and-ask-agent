@@ -18,19 +18,19 @@
     "ai_usage": "Strands-compatible agent flow with deterministic authority gating and optional Bedrock-backed execution.",
     "codex_usage": "Codex implemented, tested, documented, and packaged the local demonstration and its receipt/replay evidence."
   },
-  "current_stage": "start-hackathon",
-  "completed_stages": [],
-  "rules_acknowledged": false,
+  "current_stage": "resources",
+  "completed_stages": ["start-hackathon", "review-hackathon-rules"],
+  "rules_acknowledged": true,
   "learning": {
-    "status": "not-started",
+    "status": "complete",
     "current_step": "",
-    "completed_steps": [],
-    "plan_file": "",
-    "checklist_file": ""
+    "completed_steps": ["resources-reviewed", "local-build-verified", "evaluation-packaged"],
+    "plan_file": "NEBIUS_ADAPTATION.md",
+    "checklist_file": "SUBMISSION_PACKET.md"
   },
   "submission": {
     "draft_file": "devpost-submission.md",
-    "status": "drafting"
+    "status": "drafting-with-evidence"
   },
-  "next_command": "start-hackathon"
+  "next_command": "resources"
 }

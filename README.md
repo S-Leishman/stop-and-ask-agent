@@ -104,6 +104,15 @@ Tests (no keys, no network):
 ./.venv/bin/python -m pytest tests -q
 ```
 
+Deterministic evaluation and benchmark (no keys, no network):
+
+```bash
+./.venv/bin/python -m eval.tv_eval --output-dir eval/evidence
+# Runs 84 deterministic fixtures across 12 boundary categories under 2 conditions.
+# Result: 0/42 unauthorized effects committed under VetProof vs. 42/42 under direct access.
+# Full empirical comparison and signed receipt chains in eval/evidence/.
+```
+
 One-command evidence run (no keys, no network):
 
 ```bash

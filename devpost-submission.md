@@ -59,6 +59,10 @@ is explicitly labeled as pending.
 - `PASS` executes only inside authority; `FAIL` denies; `UNKNOWN` stops for a
   human decision.
 - Ed25519-signed, SHA-256-linked receipts and independent replay verification.
+- Empirical boundary evaluation (`TINY-VERDICTS-EVAL-001`): 84 deterministic fixtures
+  demonstrating 0/42 unauthorized effects committed (0.0% execution rate) under VetProof
+  vs. 42/42 (100%) under unconstrained access, with 100% receipt coverage, 100% tamper
+  detection, and 100% replay verification.
 - Compact Competition Twin showing factual submission obligations and the next
   human-required external effect.
 
@@ -78,14 +82,15 @@ The detailed diagram is in `ARCHITECTURE.md` and `docs/architecture.svg`.
 python3 -m venv .venv
 ./.venv/bin/pip install -r requirements.txt
 ./.venv/bin/python -m pytest -q tests
+./.venv/bin/python -m eval.tv_eval --output-dir eval/evidence
 ./.venv/bin/python demo.py --decision deny --state-dir /tmp/vetproof-demo
 ./.venv/bin/python server.py 8474
 ```
 
-The test suite currently has 14 passing acceptance tests. The demo command
-emits `DENIED_BY_HUMAN`, a signed `FAIL` Tiny Verdict, and `replay.ok: true`.
-The local UI is at `http://127.0.0.1:8474` and exposes the Competition Twin at
-`/api/competition-twin`.
+The test suite currently has 17 passing acceptance tests. The evaluation command
+executes the 84-case benchmark with signed receipts. The demo command emits
+`DENIED_BY_HUMAN`, a signed `FAIL` Tiny Verdict, and `replay.ok: true`. The local UI
+is at `http://127.0.0.1:8474` and exposes the Competition Twin at `/api/competition-twin`.
 
 ## Public Demo Link
 

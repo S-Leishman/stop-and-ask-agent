@@ -53,12 +53,17 @@ class AuthorityGate:
         self.writes_consumed = 0
 
     def check(self, effect: str) -> Decision:
+        if (
+            effect.startswith("DELETE")
+            or effect.startswith("DROP")
+            or effect.startswith("OVERWRITE_CANONICAL")
+            or effect in ("DELETE_DATA", "EXTERNAL_SUBMIT", "SPEND", "CREDENTIAL_CHANGE")
+        ):
+            return DENIED
         if effect in self.contract.allowed_effects or effect in self.READ_EFFECTS:
             if effect.endswith("WRITE") or effect == "COMMIT_OUTPUT":
                 if self.writes_consumed >= self.contract.max_writes:
                     return REQUIRES_HUMAN      # ceiling reached: stop and ask
                 self.writes_consumed += 1
             return ALLOWED
-        if effect in ("DELETE_DATA", "EXTERNAL_SUBMIT", "SPEND", "CREDENTIAL_CHANGE"):
-            return DENIED
         return REQUIRES_HUMAN
