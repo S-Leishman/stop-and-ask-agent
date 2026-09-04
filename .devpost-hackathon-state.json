@@ -1,0 +1,36 @@
+{
+  "plugin": "devpost-hackathon",
+  "version": 2,
+  "hackathon": {
+    "slug": "agentsforhumans",
+    "name": "Agents for Humans Hackathon",
+    "url": "https://agentsforhumans.devpost.com/",
+    "selected": true,
+    "source": "known"
+  },
+  "participant": {
+    "name": "Scott Leishman",
+    "display_name": "Scott Leishman"
+  },
+  "project": {
+    "name": "VetProof: Tiny Verdicts for AI Agents",
+    "summary": "A Strands agent that works inside standing authority, stops at consequential boundaries, and emits replayable Tiny Verdict evidence.",
+    "ai_usage": "Strands-compatible agent flow with deterministic authority gating and optional Bedrock-backed execution.",
+    "codex_usage": "Codex implemented, tested, documented, and packaged the local demonstration and its receipt/replay evidence."
+  },
+  "current_stage": "start-hackathon",
+  "completed_stages": [],
+  "rules_acknowledged": false,
+  "learning": {
+    "status": "not-started",
+    "current_step": "",
+    "completed_steps": [],
+    "plan_file": "",
+    "checklist_file": ""
+  },
+  "submission": {
+    "draft_file": "devpost-submission.md",
+    "status": "drafting"
+  },
+  "next_command": "start-hackathon"
+}
