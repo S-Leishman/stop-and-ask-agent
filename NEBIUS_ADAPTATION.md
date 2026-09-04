@@ -56,3 +56,11 @@ Nebius endpoint reachable
 
 The P0 Agents for Humans submission remains the immediate deadline lane. This
 adaptation must not weaken or rewrite the proven P0 path.
+
+## Cost discipline
+
+The first NVIDIA qualification should use an available free NIM model or a
+Nebius promotional allocation. No AWS Bedrock call is needed for this lane.
+Record the exact model image, endpoint, token usage and runtime cost. If the
+NIM endpoint is not reachable, record `HOLD_NIM_ACCESS` rather than substituting
+an unverified provider and calling it a Nemotron result.
