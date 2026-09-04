@@ -1,0 +1,8 @@
+Every consequential AI action gets a Tiny Verdict.
+
+PASS. FAIL. UNKNOWN.
+
+VetProof makes the authority transition visible,
+signed, and replayable.
+
+Built with Strands Agents SDK.

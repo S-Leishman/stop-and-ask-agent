@@ -1,0 +1,8 @@
+The boundary is the product.
+
+PASS: effect is inside standing authority.
+FAIL: effect is denied and receipted.
+UNKNOWN: evidence or authority is insufficient.
+
+UNKNOWN never degrades to PASS.
+The agent stops and asks a person to decide.

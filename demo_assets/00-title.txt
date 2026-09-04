@@ -1,0 +1,7 @@
+VetProof, powered by Tiny Verdicts
+
+An agent that works autonomously
+and stops at consequential boundaries.
+
+For professionals who need useful automation
+without invisible authority.

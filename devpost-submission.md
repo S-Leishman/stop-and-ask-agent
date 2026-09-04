@@ -94,14 +94,19 @@ path above is available now.
 
 ## Public Repository Link
 
-TODO — local Git commit `486da12` is prepared; a public repository URL has not
-yet been created or verified.
+https://github.com/S-Leishman/stop-and-ask-agent
+
+Verified publicly at commit `c116cada58b895c9497c7632e0320574374f9993` on
+2026-09-04.
 
 ## Demo Video
 
-TODO — record and publish a ≤5-minute public video. The complete run-of-show is
-in `VIDEO_SKELETON.md` and covers the problem, audience, working authority flow,
-human decision, signed receipt, replay, and Competition Twin.
+A 92-second local MP4 has been rendered at
+`demo_assets/VetProof_Agents_for_Humans_demo.mp4`; its SHA-256 is recorded in
+`demo_assets/VIDEO_README.md`. TODO — publish it to YouTube or Vimeo and add
+the public URL here. The complete run-of-show is in `VIDEO_SKELETON.md` and
+covers the problem, audience, working authority flow, human decision, signed
+receipt, replay, and Competition Twin.
 
 ## Screenshot Shot List
 
@@ -109,7 +114,7 @@ human decision, signed receipt, replay, and Competition Twin.
    Verdict `UNKNOWN` visible.
 2. DENY result with signed receipt and replay verification.
 3. Competition Twin showing local `PASS`, `FAIL`, and `UNKNOWN` submission
-   gates plus `PUBLISH_REPOSITORY` as the next human-required effect.
+   gates plus `PUBLISH_DEMO_VIDEO` as the next human-required effect.
 4. Architecture diagram showing authority and effect separation.
 
 ## Submission Readiness Notes
@@ -120,7 +125,7 @@ human decision, signed receipt, replay, and Competition Twin.
   PPT/PPTX, so `docs/architecture.png` must be attached when the project is
   created.
 - Required form inputs still need the participant's country of residence and
-  AWS Builder ID, plus public repository and public video URLs.
+  AWS Builder ID, plus a public video URL.
 - A live Bedrock-backed run and public live demo could strengthen Technical
   Implementation but are not being claimed as complete.
 
@@ -140,7 +145,7 @@ human decision, signed receipt, replay, and Competition Twin.
 | Country of Residence (27730) | TODO: user-provided exact selection required |
 | Organization (27731) | Leave blank unless entering on behalf of an organization |
 | Track (27732) | Professional Agents — proposed |
-| Public code repo (27733) | TODO: public URL required |
+| Public code repo (27733) | https://github.com/S-Leishman/stop-and-ask-agent |
 | Architecture diagram (27734) | Attach `docs/architecture.png` when project exists |
 | AWS Builder ID (27735) | TODO: user-provided |
 | Live demo (27736) | Optional; TODO |
