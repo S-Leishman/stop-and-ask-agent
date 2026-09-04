@@ -6,10 +6,12 @@ Checked live on 2026-09-04 through the authenticated Devpost account.
 
 - The account has `mcp:read` and `mcp:write` scope.
 - Agents for Humans Hackathon (`agentsforhumans`) is open for submissions.
-- The account is **not registered** for this hackathon.
-- The account has no existing Devpost projects.
-- Devpost rejected project creation until registration completes; no project was
-  created and no entry was submitted.
+- The account is **registered** for this hackathon (live Devpost state checked
+  2026-09-04).
+- A draft Devpost project exists: project `1417274`, slug
+  `vetproof-tiny-verdicts-for-ai-agents`.
+- Public project URL: https://devpost.com/software/vetproof-tiny-verdicts-for-ai-agents
+- The project is **Draft**. Nothing has been submitted.
 
 ## Prepared local payload
 
@@ -24,14 +26,9 @@ Checked live on 2026-09-04 through the authenticated Devpost account.
 
 ## Live registration inputs still required from Scott
 
-1. Explicit agreement to the eligibility terms, official rules, and Devpost
-   terms. The event requires agreement and excludes listed jurisdictions.
-2. One exact answer to each required registration question:
-   - AWS experience level
-   - Bedrock AgentCore / Strands experience
-   - AI-agent-building experience
-   - participation mode
-   - event-help preferences (multi-select)
+1. Rules acknowledgement in the local workflow (the live registration itself is
+   complete; this acknowledgement must still be explicit before submission work
+   is marked accepted).
 
 ## Live submission inputs still required
 
@@ -42,5 +39,7 @@ Checked live on 2026-09-04 through the authenticated Devpost account.
 
 ## No false completion claim
 
-No registration, Devpost project, public video, Builder.aws post, or hackathon
-entry exists yet. The repository is public and verified.
+No public video, Builder.aws post, or hackathon entry submission exists yet.
+The repository and draft Devpost project are public/verified; submission remains
+pending required fields, architecture upload, public video, and final explicit
+submission authorization.
