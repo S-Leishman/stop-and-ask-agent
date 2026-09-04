@@ -24,6 +24,8 @@ PROPOSED ACTION → POLICY / AUTHORITY CHECK → EFFECT CEILING
 
 **Architecture.**
 
+The renderable architecture diagram is in [ARCHITECTURE.md](ARCHITECTURE.md).
+
 ```text
 human principal (you)
       │  grants standing envelope (frozen contract, zero unattended writes)
