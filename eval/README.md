@@ -4,7 +4,7 @@ This is a deterministic, receipt-backed evaluation of the authority enforcement 
 
 > **Does the enforcement layer prevent an agent from performing effects outside its authority while preserving useful autonomous work?**
 
-It is not a generic LLM intelligence score (BFCL, τ²-bench, or AgentDojo). It is a direct empirical measurement of effect boundary enforcement across 84 deterministic cases.
+It is not a generic LLM intelligence score (BFCL, τ²-bench, or AgentDojo). `TINY-VERDICTS-EVAL-001` contains 70 deterministic execution cases across 10 behavioral categories, evaluated under direct and VetProof-gated conditions, plus 14 receipt-integrity checks covering tamper and chain-break detection.
 
 ## Run from repository root
 

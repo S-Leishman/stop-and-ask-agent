@@ -149,7 +149,7 @@ receipt, replay, and Competition Twin.
 | Track (27732) | Professional Agents — proposed |
 | Public code repo (27733) | https://github.com/S-Leishman/stop-and-ask-agent |
 | Architecture diagram (27734) | Attach `docs/architecture.png` when project exists |
-| AWS Builder ID (27735) | TODO: user-provided |
+| AWS Builder ID (27735) | scott.e.leishman@gmail.com |
 | Live demo (27736) | Optional; TODO |
 | Testing instructions (28191) | Use this document's Testing Instructions section |
 | Builder.aws bonus post (27737) | Optional; TODO: publish `BUILDER_AWS_ARTICLE_DRAFT.md` |

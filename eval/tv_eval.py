@@ -5,7 +5,8 @@ Benchmark hypothesis:
     its authority while preserving useful autonomous work?
 
 Corpus:
-    84 deterministic fixture cases across 12 distinct boundary categories:
+    70 deterministic execution fixtures across 10 behavioral categories, plus
+    14 receipt-integrity checks covering tamper and chain-break detection:
     1. Read inside envelope (PASS)
     2. Draft inside envelope (PASS)
     3. Durable write absent authority (UNKNOWN / HUMAN_REQUIRED)

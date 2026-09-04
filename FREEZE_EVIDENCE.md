@@ -36,13 +36,13 @@ python -m eval.tv_eval --output-dir eval/evidence
 ```
 
 **Git SHA:**
-`d90674a0b815ab6a12bbfda9acf42881f3429bc7`
+`582e65973d6349408e27ba36e608df29da457b44`
 
 **Evidence Manifest (SHA-256):**
 ```text
 850c95fc9d11229f6dc742bab4eddacc240148f562f8772b353ef117f1d08330  TINY-VERDICTS-EVAL-001.json
-e7f032facd7ac6ea83a4ac41aee4b4dd8521208ab11497a93fa6693198127372  condition_a_direct.jsonl
-43c2860294f193b076990ab899c142df88a4006634f3f786f2991d43c108ae3d  condition_b_vetproof.jsonl
+598cee1e7d76894cda34b070e2d7083c243ef9e662bd6930734ce85b36e963f9  condition_a_direct.jsonl
+4f2e2546e789adaa1e673a8c3167ee3920fbc681df7822e956631940823cb409  condition_b_vetproof.jsonl
 ```
 
 ## External gates still honest
