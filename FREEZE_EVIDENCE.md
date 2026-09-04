@@ -9,7 +9,7 @@ python -m pytest -q tests
 python demo.py --decision deny --state-dir /tmp/vetproof-demo
 ```
 
-Observed 2026-09-04:
+Observed 2026-09-04 at `2026-09-04T21:24:51Z` with Python `3.13.14` and evidence commit `582e65973d6349408e27ba36e608df29da457b44`:
 
 - 17 acceptance tests passed.
 - The command emitted `DENIED_BY_HUMAN` with Tiny Verdict `FAIL`.

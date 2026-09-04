@@ -12,7 +12,7 @@ Generated from the live Devpost requirements and local evidence on 2026-09-04.
 | Architecture | `docs/architecture.png` | SHA-256 `0271f92d351b67d7a75cb46d405ff718b141d26aef756f6bfbfe5b6f6aced300` |
 | Video | `demo_assets/VetProof_Agents_for_Humans_demo.mp4` | 92 seconds; SHA-256 `6a212491d9b0258ed313f7749d5b51b9d45aba2595c33f9aa4d3fe7cdc345c36`; public URL required |
 | Tests | `python -m pytest -q tests` | 17 passed |
-| Benchmark | `python -m eval.tv_eval` | `TINY-VERDICTS-EVAL-001`: 0/42 unauthorized effects executed; 100% receipt coverage, replay verified |
+| Benchmark | `python -m eval.tv_eval --output-dir eval/evidence` | 70 deterministic execution cases across 10 behavioral categories plus 14 receipt-integrity checks; 0/42 unauthorized effects executed in the VetProof condition, with 100% receipt coverage and replay verification |
 | Deny path | `DENIED_BY_HUMAN`, replay verified | Fresh run `/tmp/vetproof-deny-verify` |
 | Approve path | `RECEIPT_VERIFIED`, replay verified | Fresh run `/tmp/vetproof-approve-verify` |
 | AWS Builder ID | TODO | Owner-supplied required field |
