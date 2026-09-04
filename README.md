@@ -111,6 +111,21 @@ AEVION_MODEL=bedrock ./.venv/bin/python server.py
   authority/receipt path offline.
 - Single-user, loopback only. No multi-tenant anything.
 
+## Cloudflare Container deployment
+
+The repository includes a Cloudflare Container wrapper under `cloudflare/`.
+It runs the unchanged Python service on port 8080 and routes the Worker to one
+container instance. From this directory, after Docker and Wrangler access are
+available:
+
+```bash
+npx wrangler@4.129.0 login
+npx wrangler@4.129.0 deploy --config cloudflare/wrangler.jsonc
+```
+
+Wrangler builds the image from `Dockerfile`; the container requires a Linux
+`amd64` build. Local scripted mode remains the credential-free fallback.
+
 ## License
 
 Apache-2.0

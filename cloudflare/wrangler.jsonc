@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "vetproof-tiny-verdicts",
+  "main": "worker.js",
+  "compatibility_date": "2026-09-04",
+  "containers": [
+    {
+      "class_name": "VetProofContainer",
+      "image": "../Dockerfile",
+      "max_instances": 1
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "VETPROOF_CONTAINER",
+        "class_name": "VetProofContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["VetProofContainer"]
+    }
+  ]
+}

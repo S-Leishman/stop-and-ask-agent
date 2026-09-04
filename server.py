@@ -61,6 +61,8 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     import sys
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 8474
-    print(f"stop-and-ask agent on http://127.0.0.1:{port} (loopback only)")
-    ThreadingHTTPServer(("127.0.0.1", port), Handler).serve_forever()
+    import os
+    port = int(os.environ.get("PORT", sys.argv[1] if len(sys.argv) > 1 else 8474))
+    host = os.environ.get("HOST", "127.0.0.1")
+    print(f"stop-and-ask agent on http://{host}:{port}")
+    ThreadingHTTPServer((host, port), Handler).serve_forever()

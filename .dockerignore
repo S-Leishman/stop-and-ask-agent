@@ -1,0 +1,8 @@
+.git
+.venv
+__pycache__
+*.pyc
+data/*.jsonl
+demo_assets
+tests
+outputs
