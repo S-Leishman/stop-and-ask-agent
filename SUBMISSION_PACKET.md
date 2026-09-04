@@ -8,7 +8,7 @@ Generated from the live Devpost requirements and local evidence on 2026-09-04.
 |---|---|---|
 | Title | VetProof: Tiny Verdicts for AI Agents | Live draft |
 | Track | Professional Agents | Fit to professional workflow |
-| Repository | https://github.com/S-Leishman/stop-and-ask-agent | Public; HEAD `1172948` |
+| Repository | https://github.com/S-Leishman/stop-and-ask-agent | Public; HEAD `81d86ff` |
 | Architecture | `docs/architecture.png` | SHA-256 `0271f92d351b67d7a75cb46d405ff718b141d26aef756f6bfbfe5b6f6aced300` |
 | Video | `demo_assets/VetProof_Agents_for_Humans_demo.mp4` | 92 seconds; SHA-256 `6a212491d9b0258ed313f7749d5b51b9d45aba2595c33f9aa4d3fe7cdc345c36`; public URL required |
 | Tests | `python -m pytest -q tests` | 17 passed |

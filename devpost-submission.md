@@ -101,7 +101,7 @@ path above is available now.
 
 https://github.com/S-Leishman/stop-and-ask-agent
 
-Verified publicly at commit `c116cada58b895c9497c7632e0320574374f9993` on
+Verified publicly at commit `81d86ff6c4edd3a85c978fc8783b30b59a86260b` on
 2026-09-04.
 
 ## Demo Video
