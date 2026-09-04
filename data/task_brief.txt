@@ -1,0 +1,2 @@
+Weekly status brief for ACME renewal.
+Sensor uptime 99.2%. Two open P1s. Customer asked for receipt-backed compliance evidence.

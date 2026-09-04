@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Stop-and-Ask Agent — human authority surface</title>
+<style>
+  body{font-family:ui-monospace,monospace;background:#0d1117;color:#e6edf3;margin:0;padding:2rem}
+  h1{font-size:1.1rem;color:#58a6ff}
+  .stages{display:flex;flex-direction:column;gap:.55rem;max-width:760px}
+  .stage{padding:.7rem 1rem;border:1px solid #30363d;border-radius:6px;background:#161b22}
+  .stage.active{border-color:#58a6ff;box-shadow:0 0 0 1px #58a6ff}
+  .stage.done{border-color:#238636}
+  .stage.alert{border-color:#d29922;background:#251d0e}
+  .stage .k{color:#8b949e}
+  pre{white-space:pre-wrap;color:#7ee787;margin:.4rem 0 0}
+  .ask{font-size:1.05rem;color:#ffa657}
+  button{font-family:inherit;font-size:1rem;padding:.6rem 1.4rem;margin:.4rem .5rem 0 0;border-radius:6px;border:1px solid #30363d;cursor:pointer}
+  #approve{background:#238636;color:#fff}#deny{background:#b62324;color:#fff}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  .receipt{max-width:760px;overflow-x:auto}
+</style>
+</head>
+<body>
+<h1>Stop-and-Ask Agent — the agent works; the human decides at the boundary</h1>
+<div class="stages" id="stages"></div>
+<div style="margin-top:1rem">
+  <button id="approve" onclick="decide('approve')">APPROVE COMMIT</button>
+  <button id="deny" onclick="decide('deny')">DENY</button>
+  <button onclick="fetch('/start',{method:'POST'}).then(poll)">RUN AGENT</button>
+  <span id="replay"></span>
+</div>
+<script>
+const ORDER=["IDLE","PROPOSED_ACTION","POLICY_CHECKED","EFFECT_CEILING_REACHED","HUMAN_DECISION_REQUIRED","EFFECT_COMMITTED","DENIED_BY_HUMAN","RECEIPT_VERIFIED","ERROR"];
+function esc(s){return String(s).replace(/</g,"&lt;")}
+function render(s){
+  const idx=ORDER.indexOf(s.stage);
+  const rows=[["PROPOSED ACTION","PROPOSED_ACTION"],["POLICY / AUTHORITY CHECK","POLICY_CHECKED"],
+    ["EFFECT CEILING","EFFECT_CEILING_REACHED"],["HUMAN DECISION REQUIRED","HUMAN_DECISION_REQUIRED"],
+    ["EFFECT COMMITTED","EFFECT_COMMITTED"],["DENIED BY HUMAN","DENIED_BY_HUMAN"],
+    ["SIGNED RECEIPT + REPLAY","RECEIPT_VERIFIED"]];
+  document.getElementById("stages").innerHTML=rows.map(([label,key])=>{
+    const i=ORDER.indexOf(key);const cls=i<=idx?(s.stage===key?"stage alert":"stage done"):"stage";
+    const body=Object.entries(s).filter(([k])=>!["stage"].includes(k)&&ORDER.indexOf(k)<0)
+      .map(([k,v])=>`<span class="k">${esc(k)}:</span> ${esc(typeof v==="object"?JSON.stringify(v):v)}`).join("<br>");
+    return `<div class="${cls}"><b>${label}</b><br>${i===idx?body:(i<idx?"<span class='k'>complete</span>":"<span class='k'>pending</span>")}</div>`;
+  }).join("")+(s.stage==="RECEIPT_VERIFIED"?`<div class="stage done receipt"><b>RECEIPT</b><pre>${esc(JSON.stringify(s.receipt,null,1))}</pre>replay: ${esc(JSON.stringify(s.replay))}</div>`:"");
+  const waiting=s.stage==="HUMAN_DECISION_REQUIRED";
+  document.getElementById("approve").disabled=!waiting;document.getElementById("deny").disabled=!waiting;
+}
+function poll(){fetch("/state").then(r=>r.json()).then(s=>{render(s);if(!["RECEIPT_VERIFIED","DENIED_BY_HUMAN","ERROR"].includes(s.stage))setTimeout(poll,700)})}
+function decide(d){fetch("/"+d,{method:"POST"}).then(poll)}
+poll();
+</script>
+</body>
+</html>
