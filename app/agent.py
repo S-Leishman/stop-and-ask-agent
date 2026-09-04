@@ -25,7 +25,7 @@ class StopAndAskFlow:
 
     def __init__(self, state_dir: Path | None = None):
         self.state_dir = state_dir or (ROOT / "data")
-        self.chain = ReceiptChain(self.state_dir / "receipts.jsonl")
+        self.chain = ReceiptChain(self.state_dir / "strands_spike_001_receipts.jsonl")
         parent = AuthorityContract(
             principal="human:scott",
             allowed_effects=frozenset({"READ_WORKSPACE", "DRAFT_OUTPUT", "COMMIT_OUTPUT"}),

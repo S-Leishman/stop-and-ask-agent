@@ -12,8 +12,9 @@ did, and which human decided the parts that mattered.
 carries **zero** unattended durable writes. It reads its brief, drafts the work,
 and the moment it reaches the effect ceiling it stops, shows one screen —
 proposed action, authority check, ceiling, decision — and waits. A human hits
-APPROVE or DENY. Every decision lands in a sha256-linked, append-only receipt
-chain that replays: mutate a single byte and verification fails.
+APPROVE or DENY. Every decision lands in an Ed25519-signed, sha256-linked,
+append-only receipt chain that replays: mutate a single byte and verification
+fails.
 
 ```
 PROPOSED ACTION → POLICY / AUTHORITY CHECK → EFFECT CEILING
@@ -37,7 +38,7 @@ AuthorityGate (deterministic, code — not the model)
       ▼
 one-screen decision (APPROVE / DENY)
       ▼
-receipt chain (append-only, sha256-linked) ── replay verification
+receipt chain (Ed25519-signed, sha256-linked) ── replay verification
 ```
 
 The authority decision is deterministic code. The model — whichever model —
@@ -65,10 +66,10 @@ AEVION_MODEL=bedrock ./.venv/bin/python server.py
 
 ## Known limitations (honest list)
 
-- Receipt signatures are SHA-256 chain-of-custody, not asymmetric signatures.
-  Human authorization is recorded as provenance, not cryptographic
-  non-repudiation. (The production path signs with PIV/YubiKey-backed keys —
-  not wired in this spike.)
+- Receipts are signed with an ephemeral Ed25519 key and embed its public key
+  for independent replay. They are not yet bound to a persistent PIV/YubiKey
+  identity, so the demo does not claim cryptographic non-repudiation of the
+  human's identity.
 - The demo task is deliberately small (one read, one draft, one bounded write).
 - LLM mode requires AWS credentials; scripted mode runs the identical
   authority/receipt path offline.

@@ -12,7 +12,7 @@ from app.receipts import ReceiptChain
 
 ROOT = Path(__file__).resolve().parent
 flow: StopAndAskFlow | None = None
-chain = ReceiptChain(ROOT / "data" / "receipts.jsonl")
+chain = ReceiptChain(ROOT / "data" / "strands_spike_001_receipts.jsonl")
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -30,17 +30,18 @@ class Handler(BaseHTTPRequestHandler):
             snap = flow.snapshot() if flow else {"stage": "IDLE"}
             self._send(200, json.dumps(snap).encode())
         elif self.path == "/api/replay":
-            ok, why = ReceiptChain(ROOT / "data" / "receipts.jsonl").verify()
+            ok, why = ReceiptChain(ROOT / "data" / "strands_spike_001_receipts.jsonl").verify()
             self._send(200, json.dumps({"ok": ok, "why": why}).encode())
         else:
             self._send(404, b'{"error":"not found"}')
 
     def do_POST(self):
-        global flow
+        global flow, chain
         length = int(self.headers.get("Content-Length", 0))
         body = self.rfile.read(length) if length else b"{}"
         if self.path == "/start":
             flow = StopAndAskFlow()
+            chain = flow.chain
             threading.Thread(target=flow.run, daemon=True).start()
             self._send(200, json.dumps({"started": True}).encode())
         elif self.path in ("/approve", "/deny") and flow:

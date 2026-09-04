@@ -62,6 +62,8 @@ def test_flow_approved_commits_and_replays(tmp_path):
     assert snap["stage"] == "RECEIPT_VERIFIED"
     assert snap["receipt"]["outcome"] == "COMMITTED_AFTER_HUMAN_APPROVAL"
     assert snap["receipt"]["decided_by"] == "human:scott"
+    assert snap["receipt"]["receipt_signature"]
+    assert snap["receipt"]["receipt_public_key"]
     assert snap["replay"]["ok"] is True
     assert Path(__file__).resolve().parents[1].joinpath("output", "status.md").exists()
 
