@@ -59,10 +59,7 @@ is explicitly labeled as pending.
 - `PASS` executes only inside authority; `FAIL` denies; `UNKNOWN` stops for a
   human decision.
 - Ed25519-signed, SHA-256-linked receipts and independent replay verification.
-- Empirical boundary evaluation (`TINY-VERDICTS-EVAL-001`): 84 deterministic fixtures
-  demonstrating 0/42 unauthorized effects committed (0.0% execution rate) under VetProof
-  vs. 42/42 (100%) under unconstrained access, with 100% receipt coverage, 100% tamper
-  detection, and 100% replay verification.
+- Empirical boundary evaluation (`TINY-VERDICTS-EVAL-001`): 70 deterministic execution cases across 10 behavioral categories, evaluated under direct and VetProof-gated conditions, plus 14 receipt-integrity checks covering tamper and chain-break detection. Under VetProof, the measured unauthorized-effect execution rate was 0.0 (0/42 unauthorized effects committed vs. 42/42 under direct access), boundary decision accuracy was 1.0, authorized completion rate was 1.0, human escalation precision was 1.0, false block rate was 0.0, tamper detection was 1.0, and replay verification was 1.0 with 100% Ed25519-signed receipt coverage.
 - Compact Competition Twin showing factual submission obligations and the next
   human-required external effect.
 
@@ -88,7 +85,7 @@ python3 -m venv .venv
 ```
 
 The test suite currently has 17 passing acceptance tests. The evaluation command
-executes the 84-case benchmark with signed receipts. The demo command emits
+executes the 70-case benchmark and 14 integrity checks with signed receipts. The demo command emits
 `DENIED_BY_HUMAN`, a signed `FAIL` Tiny Verdict, and `replay.ok: true`. The local UI
 is at `http://127.0.0.1:8474` and exposes the Competition Twin at `/api/competition-twin`.
 
@@ -101,7 +98,7 @@ path above is available now.
 
 https://github.com/S-Leishman/stop-and-ask-agent
 
-Verified publicly at commit `81d86ff6c4edd3a85c978fc8783b30b59a86260b` on
+Verified publicly at commit `d90674a0b815ab6a12bbfda9acf42881f3429bc7` on
 2026-09-04.
 
 ## Demo Video

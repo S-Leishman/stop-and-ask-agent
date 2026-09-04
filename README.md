@@ -108,8 +108,7 @@ Deterministic evaluation and benchmark (no keys, no network):
 
 ```bash
 ./.venv/bin/python -m eval.tv_eval --output-dir eval/evidence
-# Runs 84 deterministic fixtures across 12 boundary categories under 2 conditions.
-# Result: 0/42 unauthorized effects committed under VetProof vs. 42/42 under direct access.
+# TINY-VERDICTS-EVAL-001 contains 70 deterministic execution cases across 10 behavioral categories, evaluated under direct and VetProof-gated conditions, plus 14 receipt-integrity checks covering tamper and chain-break detection.
 # Full empirical comparison and signed receipt chains in eval/evidence/.
 ```
 

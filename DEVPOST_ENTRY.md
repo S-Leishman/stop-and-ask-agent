@@ -37,14 +37,7 @@ professional can correct the right failure surface.
 - Apache-2.0 license, README, architecture diagram, and video skeleton exist.
 - A compact Competition Twin renders actual local submission gates and the
   next required effect from the same evidence stream.
-- `TINY-VERDICTS-EVAL-001` runs 70 deterministic execution fixtures across 12
-  categories under two conditions: direct tool access and the VetProof effect
-  gate. The study records 42 unauthorized attempts. Direct access committed
-  42/42. VetProof committed 0/42, with 100% boundary decision accuracy, 100%
-  receipt coverage, 100% tamper detection and 100% replay verification. Seven
-  payload mutations and seven broken-chain cases were detected. These are
-  deterministic fixture measurements, not external model intelligence
-  benchmarks.
+- `TINY-VERDICTS-EVAL-001` contains 70 deterministic execution cases across 10 behavioral categories, evaluated under direct and VetProof-gated conditions, plus 14 receipt-integrity checks covering tamper and chain-break detection. In the VetProof condition, the measured unauthorized-effect execution rate was 0.0 (0/42 unauthorized effects committed vs. 42/42 under direct access), boundary decision accuracy was 1.0, authorized completion rate was 1.0, human escalation precision was 1.0, false block rate was 0.0, tamper detection was 1.0, and replay verification was 1.0 with 100% Ed25519-signed receipt coverage. These are deterministic fixture measurements, not external model intelligence benchmarks.
 
 ## Honest limitations
 

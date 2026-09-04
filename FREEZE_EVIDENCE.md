@@ -24,8 +24,26 @@ Observed 2026-09-04:
 - `BUILDER_AWS_ARTICLE_DRAFT.md`: article draft.
 - `/api/competition-twin`: read-only submission-gate payload for the local UI.
 - `requirements.lock`: observed dependency lock.
-- `eval/evidence/TINY-VERDICTS-EVAL-001.json`: 70-case direct versus VetProof
-  effect-boundary study with signed receipt chains and integrity checks.
+- `eval/evidence/*`: frozen evaluation artifacts.
+
+## Empirical Evaluation Evidence
+
+TINY-VERDICTS-EVAL-001 contains 70 deterministic execution cases across 10 behavioral categories, evaluated under direct and VetProof-gated conditions, plus 14 receipt-integrity checks covering tamper and chain-break detection.
+
+**Reproduction Command:**
+```bash
+python -m eval.tv_eval --output-dir eval/evidence
+```
+
+**Git SHA:**
+`d90674a0b815ab6a12bbfda9acf42881f3429bc7`
+
+**Evidence Manifest (SHA-256):**
+```text
+850c95fc9d11229f6dc742bab4eddacc240148f562f8772b353ef117f1d08330  TINY-VERDICTS-EVAL-001.json
+e7f032facd7ac6ea83a4ac41aee4b4dd8521208ab11497a93fa6693198127372  condition_a_direct.jsonl
+43c2860294f193b076990ab899c142df88a4006634f3f786f2991d43c108ae3d  condition_b_vetproof.jsonl
+```
 
 ## External gates still honest
 
