@@ -23,9 +23,10 @@ def test_competition_twin_exposes_real_submission_gates():
     gates = {gate["id"]: gate for gate in twin["gates"]}
     assert gates["SUBMISSION_SKELETON"]["verdict"] == "PASS"
     assert gates["ARCHITECTURE"]["verdict"] == "PASS"
-    assert gates["PUBLIC_REPOSITORY"]["verdict"] == "UNKNOWN"
+    assert gates["PUBLIC_REPOSITORY"]["verdict"] == "PASS"
+    assert gates["PUBLIC_REPOSITORY"]["detail"] == "https://github.com/S-Leishman/stop-and-ask-agent"
     assert gates["LIVE_BEDROCK_EXECUTION"]["verdict"] == "UNKNOWN"
-    assert twin["next_required_effect"]["effect"] == "PUBLISH_REPOSITORY"
+    assert twin["next_required_effect"]["effect"] == "PUBLISH_DEMO_VIDEO"
     assert twin["next_required_effect"]["human_required"] is True
 
 

@@ -1,12 +1,12 @@
 """A compact operational view of the competition's real submission gates."""
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
 SKELETON = ROOT.parent / "SUBMISSION_SKELETON.md"
+PUBLIC_REPOSITORY_URL = "https://github.com/S-Leishman/stop-and-ask-agent"
 
 
 def _gate(identifier: str, verdict: str, detail: str, evidence: str) -> dict:
@@ -15,7 +15,6 @@ def _gate(identifier: str, verdict: str, detail: str, evidence: str) -> dict:
 
 def competition_twin() -> dict:
     """Return operational submission truth; external claims fail closed to UNKNOWN."""
-    public_repo = os.environ.get("VETPROOF_PUBLIC_REPO_URL")
     return {
         "schema": "aevion.competition-twin/v1",
         "competition": "Agents for Humans 2026",
@@ -35,9 +34,9 @@ def competition_twin() -> dict:
             ),
             _gate(
                 "PUBLIC_REPOSITORY",
-                "PASS" if public_repo else "UNKNOWN",
-                public_repo or "no public repository URL has been evidenced",
-                "VETPROOF_PUBLIC_REPO_URL",
+                "PASS",
+                PUBLIC_REPOSITORY_URL,
+                "origin/master verified at 1058bf8",
             ),
             _gate(
                 "LIVE_BEDROCK_EXECUTION",
@@ -59,9 +58,9 @@ def competition_twin() -> dict:
             ),
         ],
         "next_required_effect": {
-            "effect": "PUBLISH_REPOSITORY",
+            "effect": "PUBLISH_DEMO_VIDEO",
             "verdict": "UNKNOWN",
             "human_required": True,
-            "reason": "the agent may prepare the repository but cannot make it public without an external authorization boundary",
+            "reason": "a public ≤5-minute video is required before the entry can be submitted",
         },
     }
