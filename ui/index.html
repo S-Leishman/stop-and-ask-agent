@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Stop-and-Ask Agent — human authority surface</title>
+<title>VetProof — Tiny Verdicts for consequential AI actions</title>
 <style>
   body{font-family:ui-monospace,monospace;background:#0d1117;color:#e6edf3;margin:0;padding:2rem}
   h1{font-size:1.1rem;color:#58a6ff}
@@ -18,11 +18,15 @@
   #approve{background:#238636;color:#fff}#deny{background:#b62324;color:#fff}
   button:disabled{opacity:.4;cursor:not-allowed}
   .receipt{max-width:760px;overflow-x:auto}
+  .twin{max-width:760px;margin:1.5rem 0;padding:1rem;border:1px solid #30363d;border-radius:6px;background:#161b22}
+  .gate{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #21262d}.pass{color:#7ee787}.fail{color:#ff7b72}.unknown{color:#ffa657}
 </style>
 </head>
 <body>
-<h1>Stop-and-Ask Agent — the agent works; the human decides at the boundary</h1>
+<h1>VetProof, powered by Tiny Verdicts</h1>
+<p>PASS / FAIL / UNKNOWN — the agent works; the human decides at the consequential boundary.</p>
 <div class="stages" id="stages"></div>
+<section class="twin"><b>COMPETITION TWIN — AGENTS FOR HUMANS</b><div id="twin">loading real submission state…</div></section>
 <div style="margin-top:1rem">
   <button id="approve" onclick="decide('approve')">APPROVE COMMIT</button>
   <button id="deny" onclick="decide('deny')">DENY</button>
@@ -35,7 +39,7 @@ function esc(s){return String(s).replace(/</g,"&lt;")}
 function render(s){
   const idx=ORDER.indexOf(s.stage);
   const rows=[["PROPOSED ACTION","PROPOSED_ACTION"],["POLICY / AUTHORITY CHECK","POLICY_CHECKED"],
-    ["EFFECT CEILING","EFFECT_CEILING_REACHED"],["HUMAN DECISION REQUIRED","HUMAN_DECISION_REQUIRED"],
+    ["EFFECT CEILING","EFFECT_CEILING_REACHED"],["TINY VERDICT","HUMAN_DECISION_REQUIRED"],["HUMAN DECISION REQUIRED","HUMAN_DECISION_REQUIRED"],
     ["EFFECT COMMITTED","EFFECT_COMMITTED"],["DENIED BY HUMAN","DENIED_BY_HUMAN"],
     ["SIGNED RECEIPT + REPLAY","RECEIPT_VERIFIED"]];
   document.getElementById("stages").innerHTML=rows.map(([label,key])=>{
@@ -49,6 +53,11 @@ function render(s){
 }
 function poll(){fetch("/state").then(r=>r.json()).then(s=>{render(s);if(!["RECEIPT_VERIFIED","DENIED_BY_HUMAN","ERROR"].includes(s.stage))setTimeout(poll,700)})}
 function decide(d){fetch("/"+d,{method:"POST"}).then(poll)}
+function renderTwin(t){
+  const gates=t.gates.map(g=>`<div class="gate"><span>${esc(g.id)}</span><b class="${esc(g.verdict.toLowerCase())}">${esc(g.verdict)}</b></div>`).join("");
+  document.getElementById("twin").innerHTML=`${gates}<p><span class="k">NEXT REQUIRED EFFECT:</span> ${esc(t.next_required_effect.effect)}<br><span class="k">HUMAN REQUIRED:</span> ${esc(t.next_required_effect.human_required)}</p>`;
+}
+fetch("/api/competition-twin").then(r=>r.json()).then(renderTwin).catch(()=>{document.getElementById("twin").textContent="competition state unavailable"});
 poll();
 </script>
 </body>

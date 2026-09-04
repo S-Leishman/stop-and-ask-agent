@@ -2,12 +2,12 @@
 
 ## Title
 
-Agents for Humans: The Agent That Stops and Asks
+VetProof, powered by Tiny Verdicts — The Agent That Stops and Asks
 
 ## One-line summary
 
-A Strands agent that completes bounded work autonomously, then visibly stops
-at a consequential write until a human decides.
+A Strands agent that completes bounded work autonomously, then emits a Tiny
+Verdict and visibly stops at a consequential write until a human decides.
 
 ## What it does
 
@@ -20,10 +20,14 @@ hash-linked receipt that an independent replay verifier can check.
 ## Evidence available now
 
 - `strands-agents==1.54.0`; full observed dependency lock in `requirements.lock`.
-- `python -m pytest -q tests` passed 9 acceptance tests on 2026-09-04.
+- `python -m pytest -q tests` passed 14 acceptance tests on 2026-09-04.
+- `python demo.py --decision deny --state-dir /tmp/vetproof-demo` produces a
+  signed `FAIL` Tiny Verdict and an independently replay-verified receipt.
 - Local UI and replay endpoint demonstrated a denied boundary with two signed
   receipts and an intact chain.
 - Apache-2.0 license, README, architecture diagram, and video skeleton exist.
+- A compact Competition Twin renders actual local submission gates and the
+  next required effect from the same evidence stream.
 
 ## Honest limitations
 

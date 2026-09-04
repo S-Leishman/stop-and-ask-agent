@@ -51,7 +51,28 @@ def test_flow_denied_by_human(tmp_path):
     snap = flow.run()
     assert snap["stage"] == "DENIED_BY_HUMAN"
     assert snap["receipt"]["outcome"] == "DENIED_BY_HUMAN"
+    assert snap["receipt"]["tiny_verdict"]["verdict"] == "FAIL"
+    assert snap["receipt"]["tiny_verdict"]["human_authority_requirement"] is False
     assert not (flow.state_dir.parent / "output" / "status.md").exists()
+
+
+def test_tiny_verdict_carries_authority_state_evidence_and_decision(tmp_path):
+    """Dropping authority, state, evidence, or the human decision must fail this contract."""
+    flow = StopAndAskFlow(state_dir=tmp_path)
+    flow.human_decision = "DENY"
+    flow.decision_event.set()
+    verdict = flow.run()["receipt"]["tiny_verdict"]
+
+    assert verdict["schema"] == "aevion.tiny-verdict/v1"
+    assert verdict["tiny_verdict_id"].startswith("tv_")
+    assert verdict["parent_authority"]["principal"] == "human:scott"
+    assert verdict["delegated_authority"]["principal"] == "human:scott/child"
+    assert verdict["observed_state"]["class"] == "DENIED_BY_HUMAN"
+    assert len(verdict["observed_state_hash"]) == 64
+    assert verdict["evidence_refs"][0]["kind"] == "task_brief"
+    assert verdict["verdict"] == "FAIL"
+    assert verdict["human_required"] is False
+    assert verdict["decision"] == "DENY"
 
 
 def test_flow_approved_commits_and_replays(tmp_path):
@@ -62,6 +83,7 @@ def test_flow_approved_commits_and_replays(tmp_path):
     assert snap["stage"] == "RECEIPT_VERIFIED"
     assert snap["receipt"]["outcome"] == "COMMITTED_AFTER_HUMAN_APPROVAL"
     assert snap["receipt"]["decided_by"] == "human:scott"
+    assert snap["receipt"]["tiny_verdict"]["verdict"] == "PASS"
     assert snap["receipt"]["receipt_signature"]
     assert snap["receipt"]["receipt_public_key"]
     assert snap["replay"]["ok"] is True

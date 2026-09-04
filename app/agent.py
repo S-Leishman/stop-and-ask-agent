@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .authority import AuthorityContract, AuthorityGate, Decision
-from .receipts import ReceiptChain, sha
+from .receipts import ReceiptChain, canonical, sha
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -26,14 +26,14 @@ class StopAndAskFlow:
     def __init__(self, state_dir: Path | None = None):
         self.state_dir = state_dir or (ROOT / "data")
         self.chain = ReceiptChain(self.state_dir / "strands_spike_001_receipts.jsonl")
-        parent = AuthorityContract(
+        self.parent = AuthorityContract(
             principal="human:scott",
             allowed_effects=frozenset({"READ_WORKSPACE", "DRAFT_OUTPUT", "COMMIT_OUTPUT"}),
             max_writes=0,          # standing envelope: ZERO unattended durable writes
             spend_ceiling=0.0,
             delegation_rights=False,
         )
-        self.child = parent.derive_child(frozenset({"READ_WORKSPACE", "DRAFT_OUTPUT"}))  # agent holds a NARROWER envelope: no write right at all
+        self.child = self.parent.derive_child(frozenset({"READ_WORKSPACE", "DRAFT_OUTPUT"}))  # agent holds a NARROWER envelope: no write right at all
         self.gate = AuthorityGate(self.child)
         self.stage = "IDLE"
         self.detail: dict = {}
@@ -50,6 +50,46 @@ class StopAndAskFlow:
         with self.lock:
             self.stage = stage
             self.detail = detail
+
+    @staticmethod
+    def _authority_ref(contract: AuthorityContract) -> dict:
+        return {
+            "principal": contract.principal,
+            "allowed_effects": sorted(contract.allowed_effects),
+            "max_writes": contract.max_writes,
+            "delegation_rights": contract.delegation_rights,
+        }
+
+    def _tiny_verdict(self, proposed: dict, verdict: str, state: str,
+                      decision: str = "PENDING") -> dict:
+        """One inspectable decision at one consequential boundary."""
+        observed_state = {
+            "class": state,
+            "writes_consumed": self.gate.writes_consumed,
+            "effect_ceiling": self.child.max_writes,
+        }
+        evidence_refs = [{
+            "kind": "task_brief",
+            "path": "data/task_brief.txt",
+            "sha256": sha((DATA / "task_brief.txt").read_bytes()),
+        }]
+        body = {
+            "schema": "aevion.tiny-verdict/v1",
+            "subject": self.child.principal,
+            "parent_authority": self._authority_ref(self.parent),
+            "delegated_authority": self._authority_ref(self.child),
+            "proposed_effect": proposed,
+            "observed_state": observed_state,
+            "observed_state_hash": sha(canonical(observed_state)),
+            "evidence_refs": evidence_refs,
+            "policy_id": "STRANDS-SPIKE-001/authority-gate",
+            "policy_version": "STRANDS-SPIKE-001/authority-gate-v1",
+            "verdict": verdict,
+            "human_required": verdict == "UNKNOWN",
+            "human_authority_requirement": verdict == "UNKNOWN",
+            "decision": decision,
+        }
+        return {"tiny_verdict_id": f"tv_{sha(canonical(body))[:16]}", **body}
 
     # -- the flow ------------------------------------------------------------
     def run(self) -> dict:
@@ -81,19 +121,23 @@ class StopAndAskFlow:
         proposed = {"effect": "COMMIT_OUTPUT", "path": "output/status.md", "bytes": len(draft.encode())}
         decision = self.gate.check("COMMIT_OUTPUT")
         if decision is not Decision.ALLOWED:
+            tiny_verdict = self._tiny_verdict(proposed, "UNKNOWN", "EFFECT_CEILING_REACHED")
             self._set("EFFECT_CEILING_REACHED", proposed=proposed,
                       ceiling=f"max_writes={self.child.max_writes} (agent envelope carries no write right)",
-                      gate_decision=decision.value)
+                      gate_decision=decision.value, tiny_verdict=tiny_verdict)
 
             # 4. HUMAN DECISION REQUIRED — stop and ask.
             self._set("HUMAN_DECISION_REQUIRED", proposed=proposed,
-                      ask="Commit the drafted output? This is outside the agent's standing envelope.")
+                      ask="Commit the drafted output? This is outside the agent's standing envelope.",
+                      tiny_verdict=tiny_verdict)
             self.decision_event.wait()
             if self.human_decision != "APPROVE":
                 receipt = self.chain.append({
                     "action": "COMMIT_OUTPUT", "outcome": "DENIED_BY_HUMAN",
                     "proposed_by": "agent:stop-and-ask", "decided_by": "human:scott",
                     "proposed": proposed, "decision": self.human_decision,
+                    "tiny_verdict": self._tiny_verdict(
+                        proposed, "FAIL", "DENIED_BY_HUMAN", self.human_decision or "DENY"),
                     "ts": datetime.now(timezone.utc).isoformat()})
                 self._set("DENIED_BY_HUMAN", receipt=receipt)
                 return receipt
@@ -110,6 +154,8 @@ class StopAndAskFlow:
             "action": "COMMIT_OUTPUT", "outcome": "COMMITTED_AFTER_HUMAN_APPROVAL",
             "proposed_by": "agent:stop-and-ask", "decided_by": "human:scott",
             "artifact": str(out_path.relative_to(ROOT)), "artifact_sha256": sha(out_path.read_bytes()),
+            "tiny_verdict": self._tiny_verdict(
+                proposed, "PASS", "COMMITTED_AFTER_HUMAN_APPROVAL", "APPROVE"),
             "ts": datetime.now(timezone.utc).isoformat()})
         ok, why = self.chain.verify()
         self._set("RECEIPT_VERIFIED", receipt=receipt, replay={"ok": ok, "why": why})

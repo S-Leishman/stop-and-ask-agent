@@ -8,6 +8,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 from app.agent import StopAndAskFlow
+from app.competition_twin import competition_twin
 from app.receipts import ReceiptChain
 
 ROOT = Path(__file__).resolve().parent
@@ -32,6 +33,8 @@ class Handler(BaseHTTPRequestHandler):
         elif self.path == "/api/replay":
             ok, why = ReceiptChain(ROOT / "data" / "strands_spike_001_receipts.jsonl").verify()
             self._send(200, json.dumps({"ok": ok, "why": why}).encode())
+        elif self.path == "/api/competition-twin":
+            self._send(200, json.dumps(competition_twin()).encode())
         else:
             self._send(404, b'{"error":"not found"}')
 

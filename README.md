@@ -1,4 +1,6 @@
-# Stop-and-Ask Agent — an agent that works autonomously and stops at the boundary
+# VetProof, powered by Tiny Verdicts
+
+## Stop-and-Ask Agent — an agent that works autonomously and stops at the boundary
 
 **The problem.** AI agents that do real work make real changes to real systems.
 The dangerous moment is not the work — it's the write that nobody explicitly
@@ -46,6 +48,27 @@ receipt chain (Ed25519-signed, sha256-linked) ── replay verification
 The authority decision is deterministic code. The model — whichever model —
 proposes; it never grants itself permission.
 
+## Tiny Verdict
+
+A Tiny Verdict is the inspectable decision object emitted at one consequential
+boundary: subject, authority envelope, exact proposed effect, observed state,
+policy version, verdict (`PASS`, `FAIL`, or `UNKNOWN`), and whether a human
+decision is required. It is stored inside the signed receipt rather than hidden
+in a dashboard aggregate.
+
+The canonical object also carries parent and delegated authority, a hash of the
+observed state, evidence references, policy identity, and the final human
+decision. The signed receipt envelope supplies the signer, receipt hash,
+previous-receipt hash, timestamp, and replay result; keeping the receipt hash
+outside its own signed body avoids a circular claim.
+
+## Competition Twin
+
+The same local UI includes a compact Competition Twin: actual submission gates,
+their `PASS` / `FAIL` / `UNKNOWN` states, and the next required external
+effect. It is a read-model of local evidence, not a claimed public deployment.
+The read-only payload is available at `/api/competition-twin`.
+
 ## Run it
 
 ```bash
@@ -59,6 +82,17 @@ Tests (no keys, no network):
 ```bash
 ./.venv/bin/python -m pytest tests -q
 ```
+
+One-command evidence run (no keys, no network):
+
+```bash
+./.venv/bin/python demo.py --decision deny --state-dir /tmp/vetproof-demo
+# emits a FAIL Tiny Verdict, Ed25519-signed receipt, and replay: {"ok": true}
+```
+
+Use `--decision approve` to demonstrate the explicit-approval branch. That
+branch creates `output/status.md`; run it in a disposable working copy when
+recording a demo.
 
 Optional LLM mode (AWS credentials with Bedrock access required):
 
