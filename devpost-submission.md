@@ -36,9 +36,11 @@ unreviewed commitments.
 The project uses the Strands Agents SDK dependency and a Strands agent path with
 bounded `read_brief` and `request_commit` tools. The authority gate is
 deterministic code: a model can propose work but cannot enlarge its own envelope
-or commit beyond the effect ceiling. The offline scripted path demonstrates the
-same authority, receipt, and replay flow without cloud credentials. A live
-Bedrock-backed run is an explicitly marked future evidence gate, not a claim.
+or commit beyond the effect ceiling. `AFH-P3-BEDROCK-002` now proves the live
+path with Strands Agents 1.54.0 and Amazon Nova Micro through Bedrock in
+`us-east-1`. The model proposed the work, the deterministic gate stopped at
+`HUMAN_DECISION_REQUIRED`, the human denied the write and replay verified the
+signed receipt.
 
 ## How We Used Codex
 
@@ -128,13 +130,12 @@ receipt, replay, and Competition Twin.
   created.
 - Required form inputs still need the participant's country of residence and
   AWS Builder ID, plus a public video URL.
-- A live Bedrock-backed run and public live demo could strengthen Technical
-  Implementation but are not being claimed as complete.
+- The live Bedrock-backed run is proven. A public live demo remains optional.
 
 ## Known Limitations
 
-- The offline demonstration uses a deterministic fallback until runtime AWS
-  credentials are supplied for a live Bedrock-backed execution.
+- The offline demonstration remains the zero-cost reproduction path. The live
+  Bedrock evidence is frozen under `eval/evidence/AFH-P3-BEDROCK-002.*`.
 - Receipt signing uses an ephemeral Ed25519 key; it is not yet bound to a
   YubiKey/PIV identity.
 - The current local UI is loopback-only and single-user.
