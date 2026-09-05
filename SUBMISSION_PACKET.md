@@ -29,7 +29,7 @@ Generated from the live Devpost requirements and local evidence on 2026-09-04.
 6. RUN A SMALL SCIENTIFIC EVAL/BENCHMARK[PASS - TINY-VERDICTS-EVAL-001 completed]
 7. RECORD <=5 MINUTE VIDEO              [PASS - 92 s public YouTube demo]
 8. PUBLISH builder.aws POST             [READY - BUILDER_AWS_ARTICLE_DRAFT.md complete]
-9. COMPLETE ALL DEVPOST FIELDS          [OPEN - Architecture attachment remains; video URL is live on Devpost]
+9. COMPLETE ALL DEVPOST FIELDS          [OPEN - MANUAL ACTION REQUIRED: User must upload docs/architecture.png to Devpost form]
 10. SUBMIT                              [OPEN - Awaiting #4-9; item 1 superseded]
 11. VERIFY submitted_at != null         [OPEN - Post-submission gate]
 12. FREEZE COMMIT/URL/VIDEO/RECEIPT     [OPEN - Final gate]
@@ -37,7 +37,7 @@ Generated from the live Devpost requirements and local evidence on 2026-09-04.
 
 ## Not yet admissible
 
-- Architecture image has not been attached to the Devpost field.
+- [TODO] USER MUST MANUALLY UPLOAD `docs/architecture.png` to Devpost to unblock submission.
 - The public video is live and synchronized to the Devpost project.
 - The Devpost project remains Draft; no submission is claimed.
 
