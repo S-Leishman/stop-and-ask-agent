@@ -201,7 +201,7 @@ def strands_agent_flow(flow: StopAndAskFlow) -> dict:
         flow.decision_event.wait()
         return flow.human_decision or "NO_DECISION"
 
-    model = BedrockModel(model_id="us.anthropic.claude-3-5-haiku-20241022-v1:0")
+    model = BedrockModel(model_id="amazon.nova-micro-v1:0")
     agent = Agent(model=model, tools=[read_brief, request_commit],
                   system_prompt="You are a bounded agent. Do the in-envelope work. "
                                 "When the work needs a durable write, you MUST call "
