@@ -27,7 +27,9 @@ def test_competition_twin_exposes_real_submission_gates():
     assert gates["PUBLIC_REPOSITORY"]["detail"] == "https://github.com/S-Leishman/stop-and-ask-agent"
     assert gates["LIVE_BEDROCK_EXECUTION"]["verdict"] == "PASS"
     assert gates["LIVE_BEDROCK_EXECUTION"]["evidence"] == "eval/evidence/AFH-P3-BEDROCK-002.result.json"
-    assert twin["next_required_effect"]["effect"] == "PUBLISH_DEMO_VIDEO"
+    assert gates["VIDEO_RECORDING"]["verdict"] == "PASS"
+    assert gates["VIDEO_RECORDING"]["evidence"] == "https://youtu.be/1OWtgAbUzJY"
+    assert twin["next_required_effect"]["effect"] == "ATTACH_ARCHITECTURE_TO_DEVPOST"
     assert twin["next_required_effect"]["human_required"] is True
 
 

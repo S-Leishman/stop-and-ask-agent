@@ -41,8 +41,12 @@ professional can correct the right failure surface.
 
 ## Honest limitations
 
-- No live Bedrock provider run has occurred because AWS credentials were not
-  made available to this runtime.
+- One live Bedrock provider run has occurred (`AFH-P3-BEDROCK-002`: Strands
+  1.54.0 with Amazon Nova Micro in `us-east-1`, owner SSO account). The model
+  proposed the effect, the deterministic gate stopped at
+  `HUMAN_DECISION_REQUIRED`, the human denied the write, and the signed receipt
+  replay verified. This proves the authority/receipt/replay path on a real
+  model call; it is not a model-intelligence benchmark.
 - The signer is ephemeral Ed25519 and is not identity-bound to PIV/YubiKey.
-- Public repository, hosted judge access, video upload, and Devpost submission
-  are external steps not yet completed.
+- Public repository is live. Hosted judge access, a public video URL, and the
+  Devpost submission remain external steps not yet completed.

@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SKELETON = ROOT.parent / "SUBMISSION_SKELETON.md"
 PUBLIC_REPOSITORY_URL = "https://github.com/S-Leishman/stop-and-ask-agent"
+PUBLIC_VIDEO_URL = "https://youtu.be/1OWtgAbUzJY"
 
 
 def _gate(identifier: str, verdict: str, detail: str, evidence: str) -> dict:
@@ -46,9 +47,9 @@ def competition_twin() -> dict:
             ),
             _gate(
                 "VIDEO_RECORDING",
-                "FAIL",
-                "video skeleton exists; no recorded video artifact is evidenced",
-                "VIDEO_SKELETON.md",
+                "PASS",
+                "92-second demo and pitch published publicly on YouTube",
+                PUBLIC_VIDEO_URL,
             ),
             _gate(
                 "DEVPOST_SHELL",
@@ -58,9 +59,9 @@ def competition_twin() -> dict:
             ),
         ],
         "next_required_effect": {
-            "effect": "PUBLISH_DEMO_VIDEO",
+            "effect": "ATTACH_ARCHITECTURE_TO_DEVPOST",
             "verdict": "UNKNOWN",
             "human_required": True,
-            "reason": "a public ≤5-minute video is required before the entry can be submitted",
+            "reason": "the architecture asset exists and must be attached to the required Devpost field",
         },
     }

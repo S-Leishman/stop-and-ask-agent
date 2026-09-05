@@ -100,15 +100,16 @@ path above is available now.
 
 https://github.com/S-Leishman/stop-and-ask-agent
 
-Verified publicly at commit `d90674a0b815ab6a12bbfda9acf42881f3429bc7` on
-2026-09-04.
+Verified publicly at commit `c7d6f1ac4b4e1c137ef6a6fa7a2a1106ffa00d97` on
+2026-09-05 (first verified public at `d90674a0b815ab6a12bbfda9acf42881f3429bc7`,
+2026-09-04).
 
 ## Demo Video
 
-A 92-second local MP4 has been rendered at
+A 92-second demo and pitch is public at
+https://youtu.be/1OWtgAbUzJY. The local source is
 `demo_assets/VetProof_Agents_for_Humans_demo.mp4`; its SHA-256 is recorded in
-`demo_assets/VIDEO_README.md`. TODO — publish it to YouTube or Vimeo and add
-the public URL here. The complete run-of-show is in `VIDEO_SKELETON.md` and
+`demo_assets/VIDEO_README.md`. The complete run-of-show is in `VIDEO_SKELETON.md` and
 covers the problem, audience, working authority flow, human decision, signed
 receipt, replay, and Competition Twin.
 
@@ -118,7 +119,7 @@ receipt, replay, and Competition Twin.
    Verdict `UNKNOWN` visible.
 2. DENY result with signed receipt and replay verification.
 3. Competition Twin showing local `PASS`, `FAIL`, and `UNKNOWN` submission
-   gates plus `PUBLISH_DEMO_VIDEO` as the next human-required effect.
+   gates plus `ATTACH_ARCHITECTURE_TO_DEVPOST` as the next human-required effect.
 4. Architecture diagram showing authority and effect separation.
 
 ## Submission Readiness Notes
@@ -128,8 +129,9 @@ receipt, replay, and Competition Twin.
 - Required architecture file is prepared locally; Devpost accepts PNG/JPG/PDF/
   PPT/PPTX, so `docs/architecture.png` must be attached when the project is
   created.
-- Required form inputs still need the participant's country of residence and
-  AWS Builder ID, plus a public video URL.
+- The public video URL is synchronized to the live Devpost project. Required
+  submission answers still include country of residence, AWS Builder ID and
+  the architecture attachment.
 - The live Bedrock-backed run is proven. A public live demo remains optional.
 
 ## Known Limitations
