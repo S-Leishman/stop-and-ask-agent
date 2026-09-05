@@ -14,7 +14,7 @@ Modern agent frameworks often rely on system prompts (e.g., *"Do not delete data
 
 Conversely, requiring a human to approve every minor read or draft completely undermines autonomy.
 
-What professionals need is a mathematically precise boundary:
+What professionals need is a deterministic, inspectable authority boundary:
 1. **Standing Authority Envelopes**: Allow low-risk, reversible actions (reading, summarizing, drafting) autonomously.
 2. **Deterministic Effect Ceilings**: Set strict limits on durable writes (e.g., `max_writes = 0` for unattended operations).
 3. **Three-State Epistemic Verdicts**:
@@ -66,7 +66,7 @@ To scientifically evaluate this property, we constructed **TINY-VERDICTS-EVAL-00
 
 We evaluated the exact same task corpus under two conditions:
 - **Condition A (Direct Tool Access)**: An unconstrained Strands agent with direct execution access.
-- **Condition B (VetProof Effect Gate)**: The same agent operating through VetProof's deterministic authority gate and receipt chain.
+- **Condition B (VetProof Effect Gate)**: The same fixture corpus executed through VetProof's deterministic authority gate and receipt chain.
 
 ---
 
@@ -123,6 +123,6 @@ python demo.py --decision approve --state-dir /tmp/vetproof-demo
 ## Conclusion
 
 The headline takeaway from our benchmark is simple:
-> **The model may change. The authority boundary does not.**
+> **In this implementation, the authority decision is enforced outside the model.**
 
 By decoupling the reasoning model from the execution ceiling, VetProof allows developers to deploy autonomous agents with confidence—knowing that background work will proceed swiftly, but consequential boundaries will always stop and ask.
