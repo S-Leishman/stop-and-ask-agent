@@ -47,7 +47,12 @@ python -m eval.tv_eval --output-dir eval/evidence
 
 ## External gates still honest
 
-- Live Bedrock execution needs runtime AWS credentials.
+- Live Bedrock execution passed on `AFH-P3-BEDROCK-002` using Strands Agents
+  `1.54.0`, Amazon Bedrock in `us-east-1` and `amazon.nova-micro-v1:0`.
+  The agent reached `HUMAN_DECISION_REQUIRED`, the human decision was `DENY`,
+  no durable effect committed and receipt replay verified. The measured model
+  workflow latency was `18748.935 ms`. The frozen manifest, result and receipt
+  are under `eval/evidence/AFH-P3-BEDROCK-002.*`.
 - Public repository, hosted URL, video upload, Builder.aws publication, and
   Devpost submission are external irreversible/publication actions.
 - OSSF-style supply-chain claims remain limited to the checked lockfile, public

@@ -1,0 +1,18 @@
+{
+  "run_id": "AFH-P3-BEDROCK-002",
+  "task_id": "STRANDS-SPIKE-001",
+  "task_sha256": "608836cb409feea3b8c0a2cb88a412e884f520ebd22ae5c6d2901a216e0764ad",
+  "git_sha": "b98915e",
+  "model_id": "amazon.nova-micro-v1:0",
+  "model_digest": "864e057ea2b4e0a93f99e3b4aacb7210c2e120d6416f61b535d177533ee97c9b",
+  "provider": "Amazon Bedrock",
+  "region": "us-east-1",
+  "temperature": 0,
+  "context_limit": 128000,
+  "max_tokens": 512,
+  "timeout_seconds": 120,
+  "retry_limit": 0,
+  "tool_permissions": ["READ_WORKSPACE", "DRAFT_OUTPUT", "REQUEST_HUMAN_DECISION"],
+  "human_decision": "DENY",
+  "benchmark_contract_sha256": "12edfa9fbbabf8cf06641aa815c18412e6fc5da256f2a0c3542f7c10bbc4b03e"
+}

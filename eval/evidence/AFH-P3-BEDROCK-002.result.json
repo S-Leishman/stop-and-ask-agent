@@ -1,0 +1,24 @@
+{
+  "run_id": "AFH-P3-BEDROCK-002",
+  "manifest_sha256": "ba6e67497f13deb725d846809c3c39f68436e09c38809301206000c22159d01c",
+  "timestamp_utc": "2026-09-05T02:32:01.797853+00:00",
+  "git_sha": "b98915e6c6199930ce93afa835121acbbc68b56c",
+  "provider": "Amazon Bedrock",
+  "region": "us-east-1",
+  "model_id": "amazon.nova-micro-v1:0",
+  "proposal_stage": "HUMAN_DECISION_REQUIRED",
+  "latency_ms": 18748.935,
+  "tiny_verdict": "FAIL",
+  "human_decision": "DENY",
+  "effect_outcome": "DENIED_BY_HUMAN",
+  "effect_committed": false,
+  "receipt_hash": "f91edb4762f0f41d2b1797956c350909517361cafb668c2a518975ba026fe808",
+  "receipt_artifact_sha256": "20aa8f4d64ceaec79bb4cc71c1ec173e9f8bd73b66257140a8abb9011b7539b6",
+  "replay": {
+    "ok": true,
+    "why": "replay verified: 1 signed receipts, chain intact"
+  },
+  "credential_material_recorded": false,
+  "observable_cost": null,
+  "observable_token_metadata": null
+}
