@@ -40,9 +40,9 @@ def competition_twin() -> dict:
             ),
             _gate(
                 "LIVE_BEDROCK_EXECUTION",
-                "UNKNOWN",
-                "no recorded provider-backed run in the local evidence bundle",
-                "FREEZE_EVIDENCE.md",
+                "PASS",
+                "Strands 1.54.0 proposed the effect through Amazon Bedrock Nova Micro; human DENY prevented the durable write and signed receipt replay verified",
+                "eval/evidence/AFH-P3-BEDROCK-002.result.json",
             ),
             _gate(
                 "VIDEO_RECORDING",

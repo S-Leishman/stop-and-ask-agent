@@ -22,8 +22,8 @@ Generated from the live Devpost requirements and local evidence on 2026-09-04.
 
 ```text
 1. CLAIM $50 AWS CREDITS               [OPEN - Owner action required]
-2. RUN ONE REAL STRANDS + BEDROCK RUN   [OPEN - Pending #1 credentials]
-3. CAPTURE RECEIPT + REPLAY FROM RUN   [OPEN - Pending #2]
+2. RUN ONE REAL STRANDS + BEDROCK RUN   [PASS - AFH-P3-BEDROCK-002]
+3. CAPTURE RECEIPT + REPLAY FROM RUN   [PASS - signed receipt, replay verified]
 4. ADD ARCHITECTURE DIAGRAM TO DEVPOST  [READY - docs/architecture.png verified]
 5. DEPLOY A LIVE JUDGE-ACCESSIBLE DEMO  [READY - Vercel / Cloudflare entrypoint tested]
 6. RUN A SMALL SCIENTIFIC EVAL/BENCHMARK[PASS - TINY-VERDICTS-EVAL-001 completed]
